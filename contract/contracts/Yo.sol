@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity =0.8.4;
+pragma solidity ^0.8.4;
 
-import "hardhat/console.sol";
 
 contract Yo {
     address owner;
@@ -30,10 +29,10 @@ contract Yo {
         yoeeReview =  reviews[yoee];
     }
 
-    function getAverageReview(address yoee) public view returns(uint yoeeAverageReview) {
+    function getAverageReview(address _yoee) public view returns(uint yoeeAverageReview) {
         (uint yoeeCount) = getCounts(_yoee);
         (uint yoeeReview) = getReview(_yoee);
-        require(yoeeCount && yoeeReview,"ERROR")
+        // SafeMath
         yoeeAverageReview = yoeeReview/yoeeCount;
     }
  
