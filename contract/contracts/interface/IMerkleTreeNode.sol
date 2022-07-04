@@ -17,5 +17,6 @@ interface IMerkleTreeNode  {
         uint256 index;
         uint256 level;
     }
+
     /// id, level, index => nodeを取得する
 }
