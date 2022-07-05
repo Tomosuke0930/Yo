@@ -10,3 +10,11 @@ interface IGroup  {
         string attr_key;
     }
 }
+/**
+    group.example
+  {
+    "name": "100+ public repos",
+    "criteria": 100,
+    "attr_key": "public_repos"
+  }
+ */
