@@ -2,12 +2,11 @@
 pragma solidity ^0.8.4;
 
 
-contract Yo {
+contract YoV1 {
     address owner;
     address payable treasurer;
     mapping(address => uint256) reviews;
     mapping(address => uint256) counts;
-
     // User Reviewed
     // Yoee is like a teacher
     // Yoer is like a student
@@ -61,29 +60,16 @@ contract Yo {
         balance = address(this).balance;
     }
 
-
-    /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
-     */
     function transferOwnership(address newOwner) external onlyOwner {
         require(newOwner != address(0), "Ownable: new owner is the zero address");
         _transferOwnership(newOwner);
     }
 
-    /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Internal function without access restriction.
-     */
     function _transferOwnership(address newOwner) internal {
         address oldOwner = owner;
         owner = newOwner;
         emit OwnershipTransferred(oldOwner, newOwner);
     }
-
-    /**
-     * @dev Throws if called by any account other than the owner.
-     */
 
     modifier onlyOwner() {
         require(owner == msg.sender, "Ownable: caller is not the owner");

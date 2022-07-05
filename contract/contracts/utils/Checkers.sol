@@ -11,7 +11,7 @@ abstract contract Checkers {
     }
 
     function _levelCheck(uint256 _level) internal pure {
-        require(_level <= 49,"Error");
+        require(_level <= 16,"Error");
     }
     
     modifier levelCheck(uint256 _level) {
@@ -20,7 +20,7 @@ abstract contract Checkers {
     }
 
     function _indexCheck(uint256 _index) internal pure {
-        require(_index <= 49,"Error");
+        require(_index <= 2**16,"Error");
     }
 
     modifier indexCheck(uint256 _index) {
