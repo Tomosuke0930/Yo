@@ -6,7 +6,7 @@ interface ICommitment  {
         uint256 id;
         string userId;
         uint256 groupId;
-        bytes32 hash;
+        bytes32 data;
         string metadata;
         address mintAddress;
         uint256 createdAt;
