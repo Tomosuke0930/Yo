@@ -5,12 +5,8 @@ import "./utils/Checkers.sol";
 contract MerkleTree is IMerkleTree, Checkers {
     uint256 constant public nums = 49;
     MerkleTree[nums] public merkleTrees;
-/** 
-// addNode
-// updateNode
-// update node data (check data? or other info)
 
- */
+    /// get "index" of Merkle Tree
     function getMerkleTreesIndex(uint256 _groupId) 
         private
         view
@@ -21,6 +17,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
+    /// get "amounts" of Merkle Tree
     function getNodeCounts(uint256 _groupId) 
         public
         view
@@ -30,6 +27,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         nodeCounts = merkleTrees[idsIndexs].nodes.length;
     }
 
+    /// get "all nodes" of Merkle Tree
     function getAllNodes(uint256 _groupId) 
         public 
         view 
@@ -40,6 +38,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         allNodes = merkleTrees[idsIndexs].nodes;
     }
     
+    /// get "all nodes" the same "level"
     function getNodesByLevel(uint _groupId, uint _level) 
         private
         view
@@ -55,6 +54,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
+    ///  get "node" by index
     function getNodeByIndex(uint _index, uint _groupId, uint _level) 
         private
         view
@@ -68,6 +68,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
+    /// get "node" by hash
     function getNodeByHash(uint256 _groupId, bytes32 _hash) 
         public 
         view 
@@ -80,6 +81,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
+    /// get "node" from groupId, level, index
     function getNode(uint256 _groupId, uint256 _level, uint256 _index)
         public 
         view 
@@ -89,11 +91,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         node = getNodeByIndex(_index, _groupId, _level);
     }
 
-    /// append(push),
-    /**
-          siblinghash: null,
-          parent: null,
-     */
+    /// add Node
     function addNode(bytes32 _data,uint256 _groupId, string calldata _groupName, uint256 _level, uint256 _index) public {
         MerkleTreeNode memory node;
         uint treeIndex = getMerkleTreesIndex(_groupId);
@@ -107,6 +105,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         merkleTrees[treeIndex].nodes.push(node);
     }
 
+    /// update Node
     function updateNode(uint256 _groupId, uint256 _level, uint256 _index, bytes32 _data) public view {
         MerkleTreeNode memory node = getNode(_groupId, _level, _index);
         node.data = _data;
