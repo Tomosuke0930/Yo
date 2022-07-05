@@ -88,4 +88,27 @@ contract MerkleTree is IMerkleTree, Checkers {
     {
         node = getNodeByIndex(_index, _groupId, _level);
     }
+
+    /// append(push),
+    /**
+          siblinghash: null,
+          parent: null,
+     */
+    function addNode(bytes32 _data,uint256 _groupId, string calldata _groupName, uint256 _level, uint256 _index) public {
+        MerkleTreeNode memory node;
+        uint treeIndex = getMerkleTreesIndex(_groupId);
+        {
+            node.data = _data;
+            node.groupId = _groupId;
+            node.groupName = _groupName;
+            node.index = _index;
+            node.level = _level;
+        }
+        merkleTrees[treeIndex].nodes.push(node);
+    }
+
+    function updateNode(uint256 _groupId, uint256 _level, uint256 _index, bytes32 _data) public view {
+        MerkleTreeNode memory node = getNode(_groupId, _level, _index);
+        node.data = _data;
+    }
 }
