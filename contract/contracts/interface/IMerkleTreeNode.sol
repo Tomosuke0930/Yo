@@ -26,4 +26,27 @@ interface IMerkleTreeNode  {
         uint256 index;
         uint256 level;
     }
+
+    struct BatchAddNode {
+        bytes32 data;
+        uint256 groupId;
+        string groupName;
+        uint256 index;
+        uint256 level;
+    }
+
+    struct BatchUpdateNode {
+        bytes32 data;
+        uint256 groupId;
+        uint256 index;
+        uint256 level;
+    }
+
+    struct BatchUpdateNodePro {
+        bytes32 data;
+        uint256 groupId;
+        uint256 index;
+        uint256 level;
+        bytes32 siblingHash;
+    }
 }

@@ -42,10 +42,9 @@ contract MerkleTree is IMerkleTree, Checkers {
     function getNodesByLevel(uint _groupId, uint _level) 
         private
         view
-        returns(MerkleTreeNode[] memory nodes) 
+        returns(MerkleTreeNode[] memory nodes,uint counts) 
     {
         MerkleTreeNode[] memory allNodes = getAllNodes(_groupId);
-        uint counts;
         for(uint i = 0; i < allNodes.length; i++) {
             if(_level == allNodes[i].level) {
                 nodes[counts] = allNodes[i];
@@ -54,13 +53,21 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
+    function getSameLevelNodesLength(uint _groupId, uint _level) 
+        external
+        view
+        returns(uint index) 
+    {
+        (,index) = getNodesByLevel(_groupId, _level);
+    }
+
     ///  get "node" by index
     function getNodeByIndex(uint _index, uint _groupId, uint _level) 
         private
         view
         returns(MerkleTreeNode memory node) 
     {
-        MerkleTreeNode[] memory nodes = getNodesByLevel(_groupId, _level);
+        (MerkleTreeNode[] memory nodes,) = getNodesByLevel(_groupId, _level);
         for(uint i = 0; i < nodes.length; i++) {
             if(_index == nodes[i].index) {
                 node = nodes[i];
@@ -92,7 +99,7 @@ contract MerkleTree is IMerkleTree, Checkers {
     }
 
     /// add Node
-    function addNode(bytes32 _data,uint256 _groupId, string calldata _groupName, uint256 _level, uint256 _index) public {
+    function addNode(bytes32 _data,uint256 _groupId, string memory _groupName, uint256 _level, uint256 _index) public {
         MerkleTreeNode memory node;
         uint treeIndex = getMerkleTreesIndex(_groupId);
         {
@@ -105,9 +112,41 @@ contract MerkleTree is IMerkleTree, Checkers {
         merkleTrees[treeIndex].nodes.push(node);
     }
 
-    /// update Node
+    /// update hash of Node
     function updateNode(uint256 _groupId, uint256 _level, uint256 _index, bytes32 _data) public view {
         MerkleTreeNode memory node = getNode(_groupId, _level, _index);
         node.data = _data;
+    }
+    
+    /// update "siblingHash" and "parent" of Node
+    function updateNodeProperties(uint256 _groupId, uint256 _level, uint256 _index,bytes32 _siblingHash) public view {
+        MerkleTreeNode memory node = getNode(_groupId, _level, _index); //this is target node
+        {
+            node.siblingHash = _siblingHash;
+            node.parent.groupId = _groupId;
+            node.parent.level = _level;
+            node.parent.index = _index;
+        }
+    }
+
+    /// Collectively execute addNode func
+    function batchAddNode(BatchAddNode[] memory txs) external {
+        for(uint i; i<txs.length;i++) {
+            addNode(txs[i].data, txs[i].groupId, txs[i].groupName, txs[i].level, txs[i].index);
+        }
+    }
+
+    /// Collectively execute updateNode func
+    function batchUpdateNode(BatchUpdateNode[] memory txs) external view {
+        for(uint i; i<txs.length;i++) {
+            updateNode(txs[i].groupId, txs[i].level, txs[i].index, txs[i].data);
+        }
+    }
+
+    /// Collectively execute updateNodeProperties func
+    function batchUpdateNodePro(BatchUpdateNodePro[] memory txs) external view {
+        for(uint i; i<txs.length; i++) {
+            updateNodeProperties(txs[i].groupId, txs[i].level, txs[i].index, txs[i].siblingHash);
+        }
     }
 }
