@@ -24,6 +24,67 @@ import type {
 } from "./common";
 
 export declare namespace IMerkleTreeNode {
+  export type BatchAddNodeStruct = {
+    data: PromiseOrValue<BytesLike>;
+    groupId: PromiseOrValue<BigNumberish>;
+    groupName: PromiseOrValue<BytesLike>;
+    index: PromiseOrValue<BigNumberish>;
+    level: PromiseOrValue<BigNumberish>;
+  };
+
+  export type BatchAddNodeStructOutput = [
+    string,
+    BigNumber,
+    string,
+    BigNumber,
+    BigNumber
+  ] & {
+    data: string;
+    groupId: BigNumber;
+    groupName: string;
+    index: BigNumber;
+    level: BigNumber;
+  };
+
+  export type BatchUpdateNodeStruct = {
+    data: PromiseOrValue<BytesLike>;
+    groupId: PromiseOrValue<BigNumberish>;
+    index: PromiseOrValue<BigNumberish>;
+    level: PromiseOrValue<BigNumberish>;
+  };
+
+  export type BatchUpdateNodeStructOutput = [
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & { data: string; groupId: BigNumber; index: BigNumber; level: BigNumber };
+
+  export type BatchUpdateNodeProStruct = {
+    groupId: PromiseOrValue<BigNumberish>;
+    index: PromiseOrValue<BigNumberish>;
+    level: PromiseOrValue<BigNumberish>;
+    parentIndex: PromiseOrValue<BigNumberish>;
+    parentLevel: PromiseOrValue<BigNumberish>;
+    siblingHash: PromiseOrValue<BytesLike>;
+  };
+
+  export type BatchUpdateNodeProStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    string
+  ] & {
+    groupId: BigNumber;
+    index: BigNumber;
+    level: BigNumber;
+    parentIndex: BigNumber;
+    parentLevel: BigNumber;
+    siblingHash: string;
+  };
+
   export type ParentLocateStruct = {
     groupId: PromiseOrValue<BigNumberish>;
     index: PromiseOrValue<BigNumberish>;
@@ -40,7 +101,7 @@ export declare namespace IMerkleTreeNode {
     id: PromiseOrValue<BigNumberish>;
     data: PromiseOrValue<BytesLike>;
     groupId: PromiseOrValue<BigNumberish>;
-    groupName: PromiseOrValue<string>;
+    groupName: PromiseOrValue<BytesLike>;
     index: PromiseOrValue<BigNumberish>;
     level: PromiseOrValue<BigNumberish>;
     siblingHash: PromiseOrValue<BytesLike>;
@@ -70,26 +131,36 @@ export declare namespace IMerkleTreeNode {
 
 export interface MerkleTreeInterface extends utils.Interface {
   functions: {
-    "addNode(bytes32,uint256,string,uint256,uint256)": FunctionFragment;
+    "addNode(bytes32,uint256,bytes32,uint256,uint256)": FunctionFragment;
+    "batchAddNode((bytes32,uint256,bytes32,uint256,uint256)[])": FunctionFragment;
+    "batchUpdateNode((bytes32,uint256,uint256,uint256)[])": FunctionFragment;
+    "batchUpdateNodePro((uint256,uint256,uint256,uint256,uint256,bytes32)[])": FunctionFragment;
     "getAllNodes(uint256)": FunctionFragment;
     "getNode(uint256,uint256,uint256)": FunctionFragment;
     "getNodeByHash(uint256,bytes32)": FunctionFragment;
     "getNodeCounts(uint256)": FunctionFragment;
+    "getSameLevelNodesLength(uint256,uint256)": FunctionFragment;
     "merkleTrees(uint256)": FunctionFragment;
     "nums()": FunctionFragment;
     "updateNode(uint256,uint256,uint256,bytes32)": FunctionFragment;
+    "updateNodeProperties(uint256,uint256,uint256,uint256,uint256,bytes32)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "addNode"
+      | "batchAddNode"
+      | "batchUpdateNode"
+      | "batchUpdateNodePro"
       | "getAllNodes"
       | "getNode"
       | "getNodeByHash"
       | "getNodeCounts"
+      | "getSameLevelNodesLength"
       | "merkleTrees"
       | "nums"
       | "updateNode"
+      | "updateNodeProperties"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -97,10 +168,22 @@ export interface MerkleTreeInterface extends utils.Interface {
     values: [
       PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchAddNode",
+    values: [IMerkleTreeNode.BatchAddNodeStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchUpdateNode",
+    values: [IMerkleTreeNode.BatchUpdateNodeStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchUpdateNodePro",
+    values: [IMerkleTreeNode.BatchUpdateNodeProStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllNodes",
@@ -123,6 +206,10 @@ export interface MerkleTreeInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
+    functionFragment: "getSameLevelNodesLength",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "merkleTrees",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
@@ -136,8 +223,31 @@ export interface MerkleTreeInterface extends utils.Interface {
       PromiseOrValue<BytesLike>
     ]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateNodeProperties",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
+  ): string;
 
   decodeFunctionResult(functionFragment: "addNode", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "batchAddNode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchUpdateNode",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchUpdateNodePro",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getAllNodes",
     data: BytesLike
@@ -152,11 +262,19 @@ export interface MerkleTreeInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getSameLevelNodesLength",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "merkleTrees",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "nums", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "updateNode", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "updateNodeProperties",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -191,11 +309,26 @@ export interface MerkleTree extends BaseContract {
     addNode(
       _data: PromiseOrValue<BytesLike>,
       _groupId: PromiseOrValue<BigNumberish>,
-      _groupName: PromiseOrValue<string>,
+      _groupName: PromiseOrValue<BytesLike>,
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    batchAddNode(
+      txs: IMerkleTreeNode.BatchAddNodeStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    batchUpdateNode(
+      txs: IMerkleTreeNode.BatchUpdateNodeStruct[],
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    batchUpdateNodePro(
+      txs: IMerkleTreeNode.BatchUpdateNodeProStruct[],
+      overrides?: CallOverrides
+    ): Promise<[void]>;
 
     getAllNodes(
       _groupId: PromiseOrValue<BigNumberish>,
@@ -232,6 +365,12 @@ export interface MerkleTree extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { nodeCounts: BigNumber }>;
 
+    getSameLevelNodesLength(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { index: BigNumber }>;
+
     merkleTrees(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -246,16 +385,41 @@ export interface MerkleTree extends BaseContract {
       _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[void]>;
+
+    updateNodeProperties(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      _index: PromiseOrValue<BigNumberish>,
+      _parentLevel: PromiseOrValue<BigNumberish>,
+      _parentIndex: PromiseOrValue<BigNumberish>,
+      _siblingHash: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
   };
 
   addNode(
     _data: PromiseOrValue<BytesLike>,
     _groupId: PromiseOrValue<BigNumberish>,
-    _groupName: PromiseOrValue<string>,
+    _groupName: PromiseOrValue<BytesLike>,
     _level: PromiseOrValue<BigNumberish>,
     _index: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  batchAddNode(
+    txs: IMerkleTreeNode.BatchAddNodeStruct[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  batchUpdateNode(
+    txs: IMerkleTreeNode.BatchUpdateNodeStruct[],
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  batchUpdateNodePro(
+    txs: IMerkleTreeNode.BatchUpdateNodeProStruct[],
+    overrides?: CallOverrides
+  ): Promise<void>;
 
   getAllNodes(
     _groupId: PromiseOrValue<BigNumberish>,
@@ -280,6 +444,12 @@ export interface MerkleTree extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  getSameLevelNodesLength(
+    _groupId: PromiseOrValue<BigNumberish>,
+    _level: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   merkleTrees(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -295,13 +465,38 @@ export interface MerkleTree extends BaseContract {
     overrides?: CallOverrides
   ): Promise<void>;
 
+  updateNodeProperties(
+    _groupId: PromiseOrValue<BigNumberish>,
+    _level: PromiseOrValue<BigNumberish>,
+    _index: PromiseOrValue<BigNumberish>,
+    _parentLevel: PromiseOrValue<BigNumberish>,
+    _parentIndex: PromiseOrValue<BigNumberish>,
+    _siblingHash: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
   callStatic: {
     addNode(
       _data: PromiseOrValue<BytesLike>,
       _groupId: PromiseOrValue<BigNumberish>,
-      _groupName: PromiseOrValue<string>,
+      _groupName: PromiseOrValue<BytesLike>,
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    batchAddNode(
+      txs: IMerkleTreeNode.BatchAddNodeStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    batchUpdateNode(
+      txs: IMerkleTreeNode.BatchUpdateNodeStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    batchUpdateNodePro(
+      txs: IMerkleTreeNode.BatchUpdateNodeProStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -328,6 +523,12 @@ export interface MerkleTree extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getSameLevelNodesLength(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     merkleTrees(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -340,6 +541,16 @@ export interface MerkleTree extends BaseContract {
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
       _data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    updateNodeProperties(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      _index: PromiseOrValue<BigNumberish>,
+      _parentLevel: PromiseOrValue<BigNumberish>,
+      _parentIndex: PromiseOrValue<BigNumberish>,
+      _siblingHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -350,10 +561,25 @@ export interface MerkleTree extends BaseContract {
     addNode(
       _data: PromiseOrValue<BytesLike>,
       _groupId: PromiseOrValue<BigNumberish>,
-      _groupName: PromiseOrValue<string>,
+      _groupName: PromiseOrValue<BytesLike>,
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    batchAddNode(
+      txs: IMerkleTreeNode.BatchAddNodeStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    batchUpdateNode(
+      txs: IMerkleTreeNode.BatchUpdateNodeStruct[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    batchUpdateNodePro(
+      txs: IMerkleTreeNode.BatchUpdateNodeProStruct[],
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getAllNodes(
@@ -376,6 +602,12 @@ export interface MerkleTree extends BaseContract {
 
     getNodeCounts(
       _groupId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    getSameLevelNodesLength(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -393,16 +625,41 @@ export interface MerkleTree extends BaseContract {
       _data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    updateNodeProperties(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      _index: PromiseOrValue<BigNumberish>,
+      _parentLevel: PromiseOrValue<BigNumberish>,
+      _parentIndex: PromiseOrValue<BigNumberish>,
+      _siblingHash: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addNode(
       _data: PromiseOrValue<BytesLike>,
       _groupId: PromiseOrValue<BigNumberish>,
-      _groupName: PromiseOrValue<string>,
+      _groupName: PromiseOrValue<BytesLike>,
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    batchAddNode(
+      txs: IMerkleTreeNode.BatchAddNodeStruct[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    batchUpdateNode(
+      txs: IMerkleTreeNode.BatchUpdateNodeStruct[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    batchUpdateNodePro(
+      txs: IMerkleTreeNode.BatchUpdateNodeProStruct[],
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getAllNodes(
@@ -425,6 +682,12 @@ export interface MerkleTree extends BaseContract {
 
     getNodeCounts(
       _groupId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getSameLevelNodesLength(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -440,6 +703,16 @@ export interface MerkleTree extends BaseContract {
       _level: PromiseOrValue<BigNumberish>,
       _index: PromiseOrValue<BigNumberish>,
       _data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    updateNodeProperties(
+      _groupId: PromiseOrValue<BigNumberish>,
+      _level: PromiseOrValue<BigNumberish>,
+      _index: PromiseOrValue<BigNumberish>,
+      _parentLevel: PromiseOrValue<BigNumberish>,
+      _parentIndex: PromiseOrValue<BigNumberish>,
+      _siblingHash: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

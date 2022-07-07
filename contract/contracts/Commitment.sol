@@ -13,7 +13,7 @@ contract Commitment is ICommitment {
     }
 
     /// get user's all commitments
-    function getAllComs(address _address) private view returns(Commitment[] memory commitments) {
+    function getAllComs(address _address) public view returns(Commitment[] memory commitments) {
         uint length = getComsLength(_address);
         for(uint i=0;i<length;i++) {
             commitments[i] = userCommitments[_address][i];

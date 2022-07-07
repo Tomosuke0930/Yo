@@ -23,15 +23,50 @@ import type {
   PromiseOrValue,
 } from "./common";
 
+export declare namespace ICommitment {
+  export type CommitmentStruct = {
+    id: PromiseOrValue<BigNumberish>;
+    userId: PromiseOrValue<string>;
+    groupId: PromiseOrValue<BigNumberish>;
+    data: PromiseOrValue<BytesLike>;
+    metadata: PromiseOrValue<string>;
+    mintAddress: PromiseOrValue<string>;
+    createdAt: PromiseOrValue<BigNumberish>;
+  };
+
+  export type CommitmentStructOutput = [
+    BigNumber,
+    string,
+    BigNumber,
+    string,
+    string,
+    string,
+    BigNumber
+  ] & {
+    id: BigNumber;
+    userId: string;
+    groupId: BigNumber;
+    data: string;
+    metadata: string;
+    mintAddress: string;
+    createdAt: BigNumber;
+  };
+}
+
 export interface CommitmentInterface extends utils.Interface {
   functions: {
     "addCom(address,uint256,bytes32,uint256,string,uint256)": FunctionFragment;
+    "getAllComs(address)": FunctionFragment;
     "getComsLength(address)": FunctionFragment;
     "updateCom(string,address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
-    nameOrSignatureOrTopic: "addCom" | "getComsLength" | "updateCom"
+    nameOrSignatureOrTopic:
+      | "addCom"
+      | "getAllComs"
+      | "getComsLength"
+      | "updateCom"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -44,6 +79,10 @@ export interface CommitmentInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllComs",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getComsLength",
@@ -60,6 +99,7 @@ export interface CommitmentInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "addCom", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getAllComs", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getComsLength",
     data: BytesLike
@@ -106,6 +146,15 @@ export interface Commitment extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getAllComs(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<
+      [ICommitment.CommitmentStructOutput[]] & {
+        commitments: ICommitment.CommitmentStructOutput[];
+      }
+    >;
+
     getComsLength(
       _address: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -130,6 +179,11 @@ export interface Commitment extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getAllComs(
+    _address: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<ICommitment.CommitmentStructOutput[]>;
+
   getComsLength(
     _address: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -153,6 +207,11 @@ export interface Commitment extends BaseContract {
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getAllComs(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<ICommitment.CommitmentStructOutput[]>;
 
     getComsLength(
       _address: PromiseOrValue<string>,
@@ -181,6 +240,11 @@ export interface Commitment extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getAllComs(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getComsLength(
       _address: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -204,6 +268,11 @@ export interface Commitment extends BaseContract {
       _userId: PromiseOrValue<string>,
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getAllComs(
+      _address: PromiseOrValue<string>,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getComsLength(
