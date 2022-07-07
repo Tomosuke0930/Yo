@@ -50,6 +50,7 @@ export declare namespace IGroup {
 export interface GroupInterface extends utils.Interface {
   functions: {
     "getGroup(uint256)": FunctionFragment;
+    "getGroups()": FunctionFragment;
     "groupIds(uint256)": FunctionFragment;
     "groupNullfiers(uint256)": FunctionFragment;
     "groups(uint256)": FunctionFragment;
@@ -60,6 +61,7 @@ export interface GroupInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "getGroup"
+      | "getGroups"
       | "groupIds"
       | "groupNullfiers"
       | "groups"
@@ -71,6 +73,7 @@ export interface GroupInterface extends utils.Interface {
     functionFragment: "getGroup",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(functionFragment: "getGroups", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "groupIds",
     values: [PromiseOrValue<BigNumberish>]
@@ -90,6 +93,7 @@ export interface GroupInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "size", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "getGroup", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getGroups", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "groupIds", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "groupNullfiers",
@@ -139,6 +143,12 @@ export interface Group extends BaseContract {
       [IGroup.GroupStructOutput] & { group: IGroup.GroupStructOutput }
     >;
 
+    getGroups(
+      overrides?: CallOverrides
+    ): Promise<
+      [IGroup.GroupStructOutput[]] & { _groups: IGroup.GroupStructOutput[] }
+    >;
+
     groupIds(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -175,6 +185,8 @@ export interface Group extends BaseContract {
     overrides?: CallOverrides
   ): Promise<IGroup.GroupStructOutput>;
 
+  getGroups(overrides?: CallOverrides): Promise<IGroup.GroupStructOutput[]>;
+
   groupIds(
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -210,6 +222,8 @@ export interface Group extends BaseContract {
       _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<IGroup.GroupStructOutput>;
+
+    getGroups(overrides?: CallOverrides): Promise<IGroup.GroupStructOutput[]>;
 
     groupIds(
       arg0: PromiseOrValue<BigNumberish>,
@@ -250,6 +264,8 @@ export interface Group extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getGroups(overrides?: CallOverrides): Promise<BigNumber>;
+
     groupIds(
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -278,6 +294,8 @@ export interface Group extends BaseContract {
       _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getGroups(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     groupIds(
       arg0: PromiseOrValue<BigNumberish>,

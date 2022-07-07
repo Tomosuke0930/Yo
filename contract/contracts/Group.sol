@@ -16,6 +16,10 @@ contract Group is IGroup {
         }
     }
 
+    function getGroups() external view returns(Group[49] memory _groups) {
+        _groups = groups;
+    }
+
     /// get "group" from _id
     function getGroup(uint256 _id) external view returns (Group memory group) {
         uint idsIndex;
