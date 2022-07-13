@@ -36,6 +36,8 @@ interface IMerkleTreeNode {
         uint128 level;
         ParentLocate parent; 
     }
+    
+    // Cannot use recursive type so, this struct used to get the location of parent node
     struct ParentLocate {
         // 32 byte slot 0, partial fill
         // The groupId for this Merkle Tree 
@@ -48,7 +50,7 @@ interface IMerkleTreeNode {
         uint128 level;
     }
 
-    // used to execute addNode function on MerkleTree.sol collectively.
+    // Used to execute addNode function on MerkleTree.sol collectively.
     // This parameters is the one of MerkleTreeNode struct
     struct BatchAddNode {
         bytes32 hash;
@@ -58,7 +60,7 @@ interface IMerkleTreeNode {
         uint128 level;
     }
 
-    // used to execute updateNode function on MerkleTree.sol collectively.
+    // Used to execute updateNode function on MerkleTree.sol collectively.
     // This parameters is the one of MerkleTreeNode struct
     struct BatchUpdateNode {
         bytes32 hash;
