@@ -78,35 +78,6 @@ contract MerkleTree is IMerkleTree, Checkers {
         }
     }
 
-    /// getNode on func
-    // function getNodeonStorage(
-    //     uint256 _groupId,
-    //     uint256 _level,
-    //     uint256 _index
-    // ) public view allCheck(_groupId, _level, _index) returns (MerkleTreeNode callhash node) {
-    //     // uint256 idsIndex;
-    //     uint256 counts;
-    //     MerkleTreeNode[] storage allNodes;
-    //     MerkleTreeNode[] storage nodes;
-    //     //get MerkleTree
-    //     for (uint256 i = 0; i < nums; i++) {
-    //         if (_groupId == merkleTrees[i].groupId) {
-    //             allNodes.push(merkleTrees[i].nodes);
-    //         }
-    //     } 
-    //     for (uint256 i = 0; i < allNodes.length; i++) {
-    //         if (_level == allNodes[i].level) {
-    //             nodes[counts].push(allNodes[i]);
-    //         }
-    //     }
-    //     for (uint256 i = 0; i < nodes.length; i++) {
-    //         if (_index == nodes[i].index) {
-    //             node = nodes[i];
-    //         }
-    //     }
-        
-    // }
-
     /************************************************
      *  Add Node
      ***********************************************/
