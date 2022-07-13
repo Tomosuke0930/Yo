@@ -16,6 +16,7 @@ pragma solidity ^0.8.4;
 
 interface IMerkleTreeNode {
     struct MerkleTreeNode {
+        // gas saving
         // 32 byte slot 0, partial fill
         // The hash of node
         bytes32 hash;

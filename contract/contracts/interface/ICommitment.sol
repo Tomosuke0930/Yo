@@ -16,11 +16,11 @@ interface ICommitment  {
     /// @param createdAt - The time creating this commitment
     struct Commitment {
         uint256 id;
-        string userId;
+        bytes32 userId;
         uint256 groupId;
         bytes32 hash;
-        string metadata;
         address mintAddress;
         uint256 createdAt;
+        string metadata;
     }
 }

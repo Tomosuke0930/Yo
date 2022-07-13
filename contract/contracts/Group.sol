@@ -20,7 +20,7 @@ contract Group is IGroup {
         for (uint256 i = 0; i < size; i++) {
             groups[i] = _groups[i];
             groupIds[i] = _groups[i].id;
-            groupNullfiers[i] = _groups[i].nullfier;
+            groupNullfiers[i] = _groups[i].nullifier;
         }
     }
 

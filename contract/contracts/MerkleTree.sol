@@ -98,6 +98,18 @@ contract MerkleTree is IMerkleTree, Checkers {
             node.groupName = _groupName;
             node.index = _index;
             node.level = _level;
+            /*
+            gas saving
+            - Gas Fee
+            1. from Zero to nonZero > 2.from nonZero to nonZero
+
+            refer to https://github.com/wolflo/evm-opcodes/blob/main/gas.md#a7-sstore
+            1. 22100 + (5000 - 4800) ＝ 22300 gas
+            2. 5000 + 5000 ＝ 10000 gas
+             */
+            node.parent.groupId = 49; // The max value of groupId is 48 from group.json.
+            node.parent.index = 2**16+1; // The max value of parentIndex is 2^16 because MAX_TREE_DEPTH is 16 
+            node.parent.level = 17; // The max value of level is 16 because MAX_TREE_DEPTH is 16.
         }
         merkleTrees[treeIndex].nodes.push(node);
         userNodes[_signer][_groupId] = node;///check
