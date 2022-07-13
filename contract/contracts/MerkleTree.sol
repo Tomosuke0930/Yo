@@ -18,7 +18,7 @@ contract MerkleTree is IMerkleTree, Checkers {
      ***********************************************/
 
     /// get "index" of Merkle Tree
-    function getMerkleTreesIndex(uint256 _groupId) private view returns (uint256 idsIndex) {
+    function getMerkleTreesIndex(uint256 _groupId) private view returns (uint idsIndex) {
         for (uint256 i = 0; i < nums; i++) {
             if (_groupId == merkleTrees[i].groupId) return idsIndex = i;
         }
@@ -87,8 +87,8 @@ contract MerkleTree is IMerkleTree, Checkers {
         bytes32 _hash,
         uint256 _groupId,
         bytes32 _groupName,
-        uint256 _level,
-        uint256 _index
+        uint128 _index,
+        uint128 _level
     ) public {
         MerkleTreeNode memory node;
         uint256 treeIndex = getMerkleTreesIndex(_groupId);
@@ -129,10 +129,8 @@ contract MerkleTree is IMerkleTree, Checkers {
     function updateNodeProperties(
         address _signer,
         uint256 _groupId,
-        // uint256 _level,
-        // uint256 _index,
-        uint256 _parentLevel,
-        uint256 _parentIndex,
+        uint128 _parentLevel,
+        uint128 _parentIndex,
         bytes32 _siblingHash
     ) public {
         // MerkleTreeNode memory node = getNode(_groupId, _level, _index); //this is target node
