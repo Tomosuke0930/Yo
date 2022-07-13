@@ -1,34 +1,45 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "./interface/IYoMinter.sol";
-import "./interface/ERC1238/ERC1238.sol";
-import "./interface/ERC1238/extensions/ERC1238URIStorage.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@appliedzkp/semaphore-contracts/interfaces/IVerifier.sol";
-import "@appliedzkp/semaphore-contracts/base/SemaphoreCore.sol";
+import './interface/IYoMinter.sol';
+import './interface/ERC1238/ERC1238.sol';
+import './interface/ERC1238/extensions/ERC1238URIStorage.sol';
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/utils/Counters.sol';
+import '@appliedzkp/semaphore-contracts/base/SemaphoreCore.sol';
+import '@appliedzkp/semaphore-contracts/interfaces/IVerifier.sol';
+
 
 /// @title YoNFTMinter
-contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownable {
+contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownable {
+
+    /************************************************
+     *  Library & Variables  
+     ***********************************************/
+  
     using Counters for Counters.Counter;
 
-    Counters.Counter private supplyCounter;
     IVerifier private verifier;
+    Counters.Counter private supplyCounter;
 
-    /// @dev
-    /// @param verifierAddress: Verifier address.
-   constructor(address verifierAddress,string memory baseURI_) ERC1238(baseURI_)  {
+
+    /************************************************
+     *  Constructor
+     ***********************************************/
+
+    constructor(address verifierAddress, string memory baseURI_) ERC1238(baseURI_) {
         verifier = IVerifier(verifierAddress);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override(ERC1238, ERC1238URIStorage)
-        returns (bool)
-    {
+    /************************************************
+     *  NFT OPERATIONS
+     ***********************************************/
+
+    function totalSupply() public view returns (uint256) {
+        return supplyCounter.current();
+    }
+
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1238, ERC1238URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 
@@ -36,6 +47,10 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         _setBaseURI(newBaseURI);
     }
 
+    /************************************************
+     *  Mint NFT
+     ***********************************************/
+    
     /// @dev See {IContinuum-mint}.
     function mint(
         uint256 root,
@@ -48,15 +63,8 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         bytes32 s,
         bytes memory data
     ) external override {
-        bytes32 signal = bytes32("continuum");
-        _verifyProof(
-            signal,
-            root,
-            nullifierHash,
-            externalNullifier,
-            proof,
-            verifier
-        );
+        bytes32 signal = bytes32('continuum');
+        _verifyProof(signal, root, nullifierHash, externalNullifier, proof, verifier);
 
         // Prevent double-signaling (nullifierHash = hash(groupId + identityNullifier)).
         _saveNullifierHash(nullifierHash);
@@ -72,6 +80,9 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         supplyCounter.increment();
     }
 
+    /************************************************
+     *  Burn NFT
+     ***********************************************/
     function burn(
         address from,
         uint256 id,
@@ -85,7 +96,6 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         }
     }
 
-
     function _burnAndDeleteURI(
         address from,
         uint256 id,
@@ -94,10 +104,5 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         super._burn(from, id, amount);
 
         _deleteTokenURI(id);
-    }
-
-
-    function totalSupply() public view returns (uint256) {
-        return supplyCounter.current();
     }
 }

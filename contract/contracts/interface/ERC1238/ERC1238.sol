@@ -2,11 +2,11 @@
 
 pragma solidity ^0.8.4;
 
-import "./IERC1238.sol";
-import "./ERC1238Approval.sol";
-import "./IERC1238Receiver.sol";
-import "../../utils/AddressMinimal.sol";
-import "../../utils/ERC165.sol";
+import './IERC1238.sol';
+import './ERC1238Approval.sol';
+import './IERC1238Receiver.sol';
+import '../../utils/AddressMinimal.sol';
+import '../../utils/ERC165.sol';
 
 /**
  * @dev Implementation proposal for non-transferable (Badge) tokens
@@ -54,7 +54,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
      * - `account` cannot be the zero address.
      */
     function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
-        require(account != address(0), "ERC1238: balance query for the zero address");
+        require(account != address(0), 'ERC1238: balance query for the zero address');
         return _balances[id][account];
     }
 
@@ -62,13 +62,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
      * @dev See {IERC1238-balanceOfBatch}.
      *
      */
-    function balanceOfBatch(address account, uint256[] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[] memory)
-    {
+    function balanceOfBatch(address account, uint256[] memory ids) public view virtual override returns (uint256[] memory) {
         uint256[] memory batchBalances = new uint256[](ids.length);
 
         uint256 length = ids.length;
@@ -83,13 +77,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
      * @dev See {IERC1238-balanceOfBundle}.
      *
      */
-    function balanceOfBundle(address[] memory accounts, uint256[][] memory ids)
-        public
-        view
-        virtual
-        override
-        returns (uint256[][] memory)
-    {
+    function balanceOfBundle(address[] memory accounts, uint256[][] memory ids) public view virtual override returns (uint256[][] memory) {
         uint256[][] memory bundleBalances = new uint256[][](accounts.length);
 
         uint256 length = accounts.length;
@@ -138,7 +126,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
         uint256 amount,
         bytes memory data
     ) internal virtual {
-        require(to.isContract(), "ERC1238: Recipient is not a contract");
+        require(to.isContract(), 'ERC1238: Recipient is not a contract');
 
         _mint(to, id, amount, data);
 
@@ -189,7 +177,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
         uint256[] memory amounts,
         bytes memory data
     ) internal virtual {
-        require(to.isContract(), "ERC1238: Recipient is not a contract");
+        require(to.isContract(), 'ERC1238: Recipient is not a contract');
 
         _mintBatch(to, ids, amounts, data);
 
@@ -290,7 +278,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
         uint256[] memory amounts,
         bytes memory data
     ) private {
-        require(ids.length == amounts.length, "ERC1238: ids and amounts length mismatch");
+        require(ids.length == amounts.length, 'ERC1238: ids and amounts length mismatch');
 
         address minter = msg.sender;
 
@@ -318,14 +306,14 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
         uint256 id,
         uint256 amount
     ) internal virtual {
-        require(from != address(0), "ERC1238: burn from the zero address");
+        require(from != address(0), 'ERC1238: burn from the zero address');
 
         address burner = msg.sender;
 
         _beforeBurn(burner, from, id, amount);
 
         uint256 fromBalance = _balances[id][from];
-        require(fromBalance >= amount, "ERC1238: burn amount exceeds balance");
+        require(fromBalance >= amount, 'ERC1238: burn amount exceeds balance');
         unchecked {
             _balances[id][from] = fromBalance - amount;
         }
@@ -347,8 +335,8 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
         uint256[] memory ids,
         uint256[] memory amounts
     ) internal virtual {
-        require(from != address(0), "ERC1238: burn from the zero address");
-        require(ids.length == amounts.length, "ERC1238: ids and amounts length mismatch");
+        require(from != address(0), 'ERC1238: burn from the zero address');
+        require(ids.length == amounts.length, 'ERC1238: ids and amounts length mismatch');
 
         address burner = msg.sender;
 
@@ -359,7 +347,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
             _beforeBurn(burner, from, id, amount);
 
             uint256 fromBalance = _balances[id][from];
-            require(fromBalance >= amount, "ERC1238: burn amount exceeds balance");
+            require(fromBalance >= amount, 'ERC1238: burn amount exceeds balance');
             unchecked {
                 _balances[id][from] = fromBalance - amount;
             }
@@ -406,12 +394,12 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
     ) private {
         try IERC1238Receiver(to).onERC1238Mint(minter, id, amount, data) returns (bytes4 response) {
             if (response != IERC1238Receiver.onERC1238Mint.selector) {
-                revert("ERC1238: ERC1238Receiver rejected tokens");
+                revert('ERC1238: ERC1238Receiver rejected tokens');
             }
         } catch Error(string memory reason) {
             revert(reason);
         } catch {
-            revert("ERC1238: transfer to non ERC1238Receiver implementer");
+            revert('ERC1238: transfer to non ERC1238Receiver implementer');
         }
     }
 
@@ -424,12 +412,12 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
     ) private {
         try IERC1238Receiver(to).onERC1238BatchMint(minter, ids, amounts, data) returns (bytes4 response) {
             if (response != IERC1238Receiver.onERC1238BatchMint.selector) {
-                revert("ERC1238: ERC1238Receiver rejected tokens");
+                revert('ERC1238: ERC1238Receiver rejected tokens');
             }
         } catch Error(string memory reason) {
             revert(reason);
         } catch {
-            revert("ERC1238: transfer to non ERC1238Receiver implementer");
+            revert('ERC1238: transfer to non ERC1238Receiver implementer');
         }
     }
 
@@ -442,7 +430,7 @@ contract ERC1238 is ERC165, IERC1238, ERC1238Approval {
             uint8 v
         )
     {
-        require(sig.length == 65, "invalid signature length");
+        require(sig.length == 65, 'invalid signature length');
 
         assembly {
             /*

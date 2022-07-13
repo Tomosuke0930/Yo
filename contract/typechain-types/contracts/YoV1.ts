@@ -36,6 +36,8 @@ export interface YoV1Interface extends utils.Interface {
     "getClaimableAmount(address)": FunctionFragment;
     "getCounts(address)": FunctionFragment;
     "getReview(address)": FunctionFragment;
+    "owner()": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
     "sendToTreasure()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "yoTransfer(address,uint256,uint256,address)": FunctionFragment;
@@ -49,6 +51,8 @@ export interface YoV1Interface extends utils.Interface {
       | "getClaimableAmount"
       | "getCounts"
       | "getReview"
+      | "owner"
+      | "renounceOwnership"
       | "sendToTreasure"
       | "transferOwnership"
       | "yoTransfer"
@@ -74,6 +78,11 @@ export interface YoV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getReview",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "renounceOwnership",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "sendToTreasure",
@@ -105,6 +114,11 @@ export interface YoV1Interface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "getCounts", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "getReview", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "sendToTreasure",
     data: BytesLike
@@ -236,6 +250,12 @@ export interface YoV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { yoeeReview: BigNumber }>;
 
+    owner(overrides?: CallOverrides): Promise<[string]>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     sendToTreasure(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -280,6 +300,12 @@ export interface YoV1 extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  owner(overrides?: CallOverrides): Promise<string>;
+
+  renounceOwnership(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   sendToTreasure(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -321,6 +347,10 @@ export interface YoV1 extends BaseContract {
       yoee: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<string>;
+
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     sendToTreasure(overrides?: CallOverrides): Promise<void>;
 
@@ -414,6 +444,12 @@ export interface YoV1 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     sendToTreasure(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -457,6 +493,12 @@ export interface YoV1 extends BaseContract {
     getReview(
       yoee: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    renounceOwnership(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     sendToTreasure(

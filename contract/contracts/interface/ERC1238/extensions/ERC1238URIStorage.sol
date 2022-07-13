@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.4;
 
-import "../ERC1238.sol";
-import "./IERC1238URIStorage.sol";
-import "../../../utils/ERC165.sol";
+import '../ERC1238.sol';
+import './IERC1238URIStorage.sol';
+import '../../../utils/ERC165.sol';
 
 /**
  * @dev Proposal for ERC1238 token with storage based token URI management.
@@ -13,13 +13,7 @@ abstract contract ERC1238URIStorage is ERC165, IERC1238URIStorage, ERC1238 {
     // Optional mapping for token URIs
     mapping(uint256 => string) private _tokenURIs;
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override(ERC1238, ERC165, IERC165)
-        returns (bool)
-    {
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1238, ERC165, IERC165) returns (bool) {
         return interfaceId == type(IERC1238URIStorage).interfaceId || super.supportsInterface(interfaceId);
     }
 
@@ -54,7 +48,7 @@ abstract contract ERC1238URIStorage is ERC165, IERC1238URIStorage, ERC1238 {
      *
      */
     function _setBatchTokenURI(uint256[] memory ids, string[] memory tokenURIs) internal {
-        require(ids.length == tokenURIs.length, "ERC1238Storage: ids and token URIs length mismatch");
+        require(ids.length == tokenURIs.length, 'ERC1238Storage: ids and token URIs length mismatch');
 
         for (uint256 i = 0; i < ids.length; i++) {
             _setTokenURI(ids[i], tokenURIs[i]);
