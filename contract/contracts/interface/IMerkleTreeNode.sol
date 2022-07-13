@@ -12,7 +12,7 @@ pragma solidity ^0.8.4;
 interface IMerkleTreeNode {
     struct MerkleTreeNode {
         uint256 id; ///不要だったら消す`${MODEL_MERKLE_TREE}#${groupId}_0_${currentIndex}`
-        bytes32 data; //hash
+        bytes32 hash; //hash
         uint256 groupId;
         bytes32 groupName;
         uint256 index;
@@ -28,7 +28,7 @@ interface IMerkleTreeNode {
     }
 
     struct BatchAddNode {
-        bytes32 data;
+        bytes32 hash;
         uint256 groupId;
         bytes32 groupName;
         uint256 index;
@@ -36,7 +36,7 @@ interface IMerkleTreeNode {
     }
 
     struct BatchUpdateNode {
-        bytes32 data;
+        bytes32 hash;
         uint256 groupId;
         uint256 index;
         uint256 level;

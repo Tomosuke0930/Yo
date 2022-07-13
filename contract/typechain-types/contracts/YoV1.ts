@@ -40,7 +40,7 @@ export interface YoV1Interface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "sendToTreasure()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "yoTransfer(address,uint256,uint256,address)": FunctionFragment;
+    "yoTransfer(uint256,uint256,address,address)": FunctionFragment;
   };
 
   getFunction(
@@ -95,9 +95,9 @@ export interface YoV1Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "yoTransfer",
     values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>
     ]
   ): string;
@@ -266,10 +266,10 @@ export interface YoV1 extends BaseContract {
     ): Promise<ContractTransaction>;
 
     yoTransfer(
-      _yoee: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _review: PromiseOrValue<BigNumberish>,
-      frontendAddress: PromiseOrValue<string>,
+      _yoee: PromiseOrValue<string>,
+      _frontendAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -316,10 +316,10 @@ export interface YoV1 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   yoTransfer(
-    _yoee: PromiseOrValue<string>,
     _amount: PromiseOrValue<BigNumberish>,
     _review: PromiseOrValue<BigNumberish>,
-    frontendAddress: PromiseOrValue<string>,
+    _yoee: PromiseOrValue<string>,
+    _frontendAddress: PromiseOrValue<string>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -360,10 +360,10 @@ export interface YoV1 extends BaseContract {
     ): Promise<void>;
 
     yoTransfer(
-      _yoee: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _review: PromiseOrValue<BigNumberish>,
-      frontendAddress: PromiseOrValue<string>,
+      _yoee: PromiseOrValue<string>,
+      _frontendAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -460,10 +460,10 @@ export interface YoV1 extends BaseContract {
     ): Promise<BigNumber>;
 
     yoTransfer(
-      _yoee: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _review: PromiseOrValue<BigNumberish>,
-      frontendAddress: PromiseOrValue<string>,
+      _yoee: PromiseOrValue<string>,
+      _frontendAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -511,10 +511,10 @@ export interface YoV1 extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     yoTransfer(
-      _yoee: PromiseOrValue<string>,
       _amount: PromiseOrValue<BigNumberish>,
       _review: PromiseOrValue<BigNumberish>,
-      frontendAddress: PromiseOrValue<string>,
+      _yoee: PromiseOrValue<string>,
+      _frontendAddress: PromiseOrValue<string>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
