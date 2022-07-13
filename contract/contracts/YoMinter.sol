@@ -47,7 +47,7 @@ contract YoMinter is IYoMinter, SemaphoreCore,ERC1238, ERC1238URIStorage, Ownabl
         bytes32 r,
         bytes32 s,
         bytes memory data
-    ) external {
+    ) external override {
         bytes32 signal = bytes32("continuum");
         _verifyProof(
             signal,

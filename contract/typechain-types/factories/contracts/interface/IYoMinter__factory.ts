@@ -42,6 +42,59 @@ const _abi = [
     name: "ProofVerified",
     type: "event",
   },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "root",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "nullifierHash",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "externalNullifier",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256[8]",
+        name: "proof",
+        type: "uint256[8]",
+      },
+      {
+        internalType: "string",
+        name: "tokenURI",
+        type: "string",
+      },
+      {
+        internalType: "uint8",
+        name: "v",
+        type: "uint8",
+      },
+      {
+        internalType: "bytes32",
+        name: "r",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "s",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "mint",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];
 
 export class IYoMinter__factory {

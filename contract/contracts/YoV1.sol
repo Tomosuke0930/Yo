@@ -2,8 +2,12 @@
 pragma solidity ^0.8.4;
 
 import './library/TransferHelper.sol';
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 contract YoV1 {
+    using SafeMath for uint256;
+
+
     address owner;
     address payable treasurer;
     mapping(address => uint256) reviews;
@@ -32,25 +36,24 @@ contract YoV1 {
     }
 
     function getClaimableAmount(address frontendAddress) public view returns(uint claimableAmount) {
-        claimableAmount = claimableAmounts[frontendAddress]/1e3;
+        claimableAmount = claimableAmounts[frontendAddress].div(1e3);
     }
 
     function getAverageReview(address _yoee) public view returns(uint yoeeAverageReview) {
         (uint yoeeCount) = getCounts(_yoee);
         (uint yoeeReview) = getReview(_yoee);
-        // SafeMath
-        yoeeAverageReview = yoeeReview/yoeeCount;
+        yoeeAverageReview = yoeeReview.div(yoeeCount);
     }
  
     function yoTransfer(address payable _yoee, uint256 _amount,uint _review, address payable frontendAddress) external payable {
         require(msg.value == _amount, "Not save transfer amount and msg.value");
-        uint256 taxedAmount = msg.value * 98 / 100; // 2% taxed
+        uint taxedAmount = _amount.mul(98).div(100);
         TransferHelper.safeTransferETH(_yoee, taxedAmount);
         (uint yoeeCount) = getCounts(_yoee);
-        uint newCounts = yoeeCount + 1;
+        uint newCounts = yoeeCount.add(1);
         (uint yoeeReview) = getReview(_yoee);
-        uint newReviews = yoeeReview + _review;
-        claimableAmounts[frontendAddress] += _amount;
+        uint newReviews = yoeeReview.add(_review);
+        claimableAmounts[frontendAddress] =  claimableAmounts[frontendAddress].add(_amount);
         counts[_yoee] = newCounts;
         reviews[_yoee] = newReviews;
         emit Reviews(_yoee, newReviews);
@@ -66,7 +69,7 @@ contract YoV1 {
     function claim() external {
         require(claimableAmounts[msg.sender] >0);
         uint claimableAmount = getClaimableAmount(msg.sender);
-        claimableAmounts[msg.sender] -= claimableAmount;
+        claimableAmounts[msg.sender] =  claimableAmounts[msg.sender].sub(claimableAmount);
         TransferHelper.safeTransferETH(msg.sender, claimableAmount);
         emit PayFrontend(msg.sender, claimableAmount);
     }
