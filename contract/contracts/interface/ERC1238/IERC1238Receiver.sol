@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.4;
 
-import "../../utils/IERC165.sol";
+import '../../utils/IERC165.sol';
 
 /**
  * Interface for smart contracts wishing to receive ownership of ERC1238 tokens.

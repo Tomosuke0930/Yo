@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.4;
 
-import "../IERC1238.sol";
-import "../../../utils/IERC165.sol";
+import '../IERC1238.sol';
+import '../../../utils/IERC165.sol';
 
 /**
  * @dev Extension that enables tracking the balances of token owners for tokens

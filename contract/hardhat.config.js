@@ -8,16 +8,17 @@ const privateKey = process.env.PRIVATE_KEY
 const endpoint = process.env.URL
 const etherscanKey = process.env.ETHERSCAN_KEY
 module.exports = {
-  solidity: {
-    version: '0.8.4',
-  },
-  networks: {
-    rinkeby: {
-      url: endpoint,
-      accounts: [`0x${privateKey}`],
+    solidity: {
+        version: '0.8.4',
     },
-  },
-  etherscan: {
-    apiKey: etherscanKey,
-  },
+
+    networks: {
+        rinkeby: {
+            url: endpoint,
+            accounts: [`0x${privateKey}`],
+        },
+    },
+    etherscan: {
+        apiKey: etherscanKey,
+    },
 }

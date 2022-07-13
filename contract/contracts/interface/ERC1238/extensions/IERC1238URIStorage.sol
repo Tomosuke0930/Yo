@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.4;
 
-import "../IERC1238.sol";
-import "../../../utils/IERC165.sol";
+import '../IERC1238.sol';
+import '../../../utils/IERC165.sol';
 
 /**
  * @dev Proposal of an interface for ERC1238 token with storage based token URI management.

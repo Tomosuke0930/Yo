@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "../../utils/IERC165.sol";
+import '../../utils/IERC165.sol';
 
 /**
  * @dev Interface proposal for Badge tokens
@@ -51,8 +51,5 @@ interface IERC1238 is IERC165 {
      * - `accounts` and `ids` must have the same length.
      *
      */
-    function balanceOfBundle(address[] calldata accounts, uint256[][] calldata ids)
-        external
-        view
-        returns (uint256[][] memory);
+    function balanceOfBundle(address[] calldata accounts, uint256[][] calldata ids) external view returns (uint256[][] memory);
 }
