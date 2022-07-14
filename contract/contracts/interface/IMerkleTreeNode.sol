@@ -14,6 +14,8 @@ pragma solidity ^0.8.4;
 /// @title Merkle tree node interface for Yo V1
 /// @notice The type of merkle tree node in Yo V1
 
+
+// change groupsId = 16bytes
 interface IMerkleTreeNode {
     struct MerkleTreeNode {
         // gas saving
@@ -26,29 +28,29 @@ interface IMerkleTreeNode {
         // 32 byte slot 2, partial fill
         // The sibling hash of this node. The explaination of sibling hash is mentioned above.
         bytes32 siblingHash;
-        // 32 byte slot 3, partial fill
+        // 16 byte slot 3
         // The groupId for this Merkle Tree 
-        uint256 groupId;
-        // 16 byte slot 4.
+        bytes16 groupId;
+        // 8 byte slot 3
         // The index of node
-        uint128 index;
-        // 16 byte slot 4, partial fill
+        uint64 index;
+        // 8 byte slot 3. partial fill
         // The level of node
-        uint128 level;
+        uint64 level;
         ParentLocate parent; 
     }
     
     // Cannot use recursive type so, this struct used to get the location of parent node
     struct ParentLocate {
-        // 32 byte slot 0, partial fill
+        // 16 byte slot 0
         // The groupId for this Merkle Tree 
-        uint256 groupId;
-        // 16 byte slot 1.
+        bytes16 groupId;
+        // 8 byte slot 0
         // The index of node
-        uint128 index;
-        // 16 byte slot 1, partial fill.
+        uint64 index;
+        // 8 byte slot 0. partial fill
         // The level of node
-        uint128 level;
+        uint64 level;
     }
 
     // Used to execute addNode function on MerkleTree.sol collectively.
@@ -56,26 +58,26 @@ interface IMerkleTreeNode {
     struct BatchAddNode {
         bytes32 hash;
         bytes32 groupName;  
-        uint256 groupId;
-        uint128 index;
-        uint128 level;
+        bytes16 groupId;
+        uint64 index;
+        uint64 level;
     }
 
     // Used to execute updateNode function on MerkleTree.sol collectively.
     // This parameters is the one of MerkleTreeNode struct
     struct BatchUpdateNode {
         bytes32 hash;
-        uint256 groupId;
-        uint128 index;
-        uint128 level;
+        bytes16 groupId;
+        uint64 index;
+        uint64 level;
     }
 
     // used to execute updateNodeProperties function on MerkleTree.sol collectively.
     // This parameters is the one of MerkleTreeNode struct
     struct BatchUpdateNodePro {
         bytes32 siblingHash;
-        uint256 groupId;
-        uint128 parentIndex;
-        uint128 parentLevel;
+        bytes16 groupId;
+        uint64 parentIndex;
+        uint64 parentLevel;
     }
 }

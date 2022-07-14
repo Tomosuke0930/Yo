@@ -2,6 +2,5 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as erc1238 from "./ERC1238";
-export * as sampleSol from "./Sample.sol";
 export { IVerifier__factory } from "./IVerifier__factory";
 export { IYoMinter__factory } from "./IYoMinter__factory";

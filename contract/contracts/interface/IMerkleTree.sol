@@ -18,7 +18,7 @@ interface IMerkleTree is IMerkleTreeNode {
     // Merkle Tree is consist of a lot of nodes.
     struct MerkleTree {
         // The identifier of Merkle Tree
-        uint256 groupId;
+        bytes16 groupId;
         // The nodes of this Merkle Tree
         MerkleTreeNode[] nodes;
     }

@@ -29,11 +29,20 @@ import type {
 
 export interface IYoMinterInterface extends utils.Interface {
   functions: {
+    "burn(address,uint256,bool)": FunctionFragment;
     "mint(uint256,uint256,uint256,uint256[8],string,uint8,bytes32,bytes32,bytes)": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "mint"): FunctionFragment;
+  getFunction(nameOrSignatureOrTopic: "burn" | "mint"): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "burn",
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<boolean>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [
@@ -49,16 +58,27 @@ export interface IYoMinterInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
 
   events: {
+    "Burned(address,uint256)": EventFragment;
     "Minted(uint256,address)": EventFragment;
     "ProofVerified(bytes32)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ProofVerified"): EventFragment;
 }
+
+export interface BurnedEventObject {
+  from: string;
+  tokenId: BigNumber;
+}
+export type BurnedEvent = TypedEvent<[string, BigNumber], BurnedEventObject>;
+
+export type BurnedEventFilter = TypedEventFilter<BurnedEvent>;
 
 export interface MintedEventObject {
   tokenId: BigNumber;
@@ -102,6 +122,13 @@ export interface IYoMinter extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    burn(
+      from: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      deleteURI: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     mint(
       root: PromiseOrValue<BigNumberish>,
       nullifierHash: PromiseOrValue<BigNumberish>,
@@ -115,6 +142,13 @@ export interface IYoMinter extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  burn(
+    from: PromiseOrValue<string>,
+    id: PromiseOrValue<BigNumberish>,
+    deleteURI: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   mint(
     root: PromiseOrValue<BigNumberish>,
@@ -130,6 +164,13 @@ export interface IYoMinter extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    burn(
+      from: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      deleteURI: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     mint(
       root: PromiseOrValue<BigNumberish>,
       nullifierHash: PromiseOrValue<BigNumberish>,
@@ -145,6 +186,9 @@ export interface IYoMinter extends BaseContract {
   };
 
   filters: {
+    "Burned(address,uint256)"(from?: null, tokenId?: null): BurnedEventFilter;
+    Burned(from?: null, tokenId?: null): BurnedEventFilter;
+
     "Minted(uint256,address)"(tokenId?: null, to?: null): MintedEventFilter;
     Minted(tokenId?: null, to?: null): MintedEventFilter;
 
@@ -153,6 +197,13 @@ export interface IYoMinter extends BaseContract {
   };
 
   estimateGas: {
+    burn(
+      from: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      deleteURI: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     mint(
       root: PromiseOrValue<BigNumberish>,
       nullifierHash: PromiseOrValue<BigNumberish>,
@@ -168,6 +219,13 @@ export interface IYoMinter extends BaseContract {
   };
 
   populateTransaction: {
+    burn(
+      from: PromiseOrValue<string>,
+      id: PromiseOrValue<BigNumberish>,
+      deleteURI: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     mint(
       root: PromiseOrValue<BigNumberish>,
       nullifierHash: PromiseOrValue<BigNumberish>,

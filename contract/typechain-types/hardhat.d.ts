@@ -105,10 +105,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IYoMinter__factory>;
     getContractFactory(
-      name: "Oracle",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Oracle__factory>;
-    getContractFactory(
       name: "MerkleTree",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MerkleTree__factory>;
@@ -248,11 +244,6 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IYoMinter>;
-    getContractAt(
-      name: "Oracle",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.Oracle>;
     getContractAt(
       name: "MerkleTree",
       address: string,

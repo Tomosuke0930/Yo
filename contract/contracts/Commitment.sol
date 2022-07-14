@@ -5,6 +5,10 @@ import './interface/ICommitment.sol';
 
 contract Commitment is ICommitment {
 
+    /************************************************
+     *  Variable and Constraint
+     ***********************************************/
+
     mapping(address => mapping(uint256 =>Commitment)) userCommitments;
     uint256 constant MAX_COMMITMENT_LENGTH = 9;
     
@@ -39,11 +43,11 @@ contract Commitment is ICommitment {
         address _address,
         uint256 _id,
         bytes32 _hash,
-        uint256 _groupId,
         bytes32 _userId,
+        bytes16 _groupId,
         uint256 _createdAt
     ) external {
-        userCommitments[_address][_id] = Commitment(_id, _userId, _groupId, _hash,address(0), _createdAt,"");
+        userCommitments[_address][_id] = Commitment(_id, _userId, _hash,address(0), _createdAt,_groupId,"");
     }
 
     /************************************************

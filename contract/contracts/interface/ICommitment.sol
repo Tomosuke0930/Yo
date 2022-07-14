@@ -9,18 +9,18 @@ interface ICommitment  {
     /// @dev - Semaphore allows Ethereum users to prove their membership of a group using Zero Knowledge Proof
     /// @param id - The identifier of commitment 
     /// @param userId - The identifier of user
-    /// @param groupId - The idnetifier of group, each group has own Merkle Tree
     /// @param data - The hash of commitment
     /// @param metadata - The metadata is used to mint NFT
     /// @param mintAddress - The destination address to send NFT
+    /// @param groupId - The idnetifier of group, each group has own Merkle Tree
     /// @param createdAt - The time creating this commitment
     struct Commitment {
         uint256 id;
         bytes32 userId;
-        uint256 groupId;
         bytes32 hash;
         address mintAddress;
         uint256 createdAt;
+        bytes16 groupId;
         string metadata;
     }
 }
