@@ -3,7 +3,5 @@
 /* eslint-disable */
 import type * as erc1238 from "./ERC1238";
 export type { erc1238 };
-import type * as sampleSol from "./Sample.sol";
-export type { sampleSol };
 export type { IVerifier } from "./IVerifier";
 export type { IYoMinter } from "./IYoMinter";

@@ -26,23 +26,23 @@ import type {
 export declare namespace IGroup {
   export type GroupStruct = {
     id: PromiseOrValue<BigNumberish>;
-    nullfier: PromiseOrValue<BigNumberish>;
-    name: PromiseOrValue<string>;
+    nullifier: PromiseOrValue<BigNumberish>;
     criteria: PromiseOrValue<BigNumberish>;
-    attr_key: PromiseOrValue<string>;
+    name: PromiseOrValue<BytesLike>;
+    attr_key: PromiseOrValue<BytesLike>;
   };
 
   export type GroupStructOutput = [
     BigNumber,
     BigNumber,
-    string,
     BigNumber,
+    string,
     string
   ] & {
     id: BigNumber;
-    nullfier: BigNumber;
-    name: string;
+    nullifier: BigNumber;
     criteria: BigNumber;
+    name: string;
     attr_key: string;
   };
 }
@@ -140,13 +140,13 @@ export interface Group extends BaseContract {
       _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [IGroup.GroupStructOutput] & { group: IGroup.GroupStructOutput }
+      [IGroup.GroupStructOutput] & { _group: IGroup.GroupStructOutput }
     >;
 
     getGroups(
       overrides?: CallOverrides
     ): Promise<
-      [IGroup.GroupStructOutput[]] & { _groups: IGroup.GroupStructOutput[] }
+      [IGroup.GroupStructOutput[]] & { _allGroups: IGroup.GroupStructOutput[] }
     >;
 
     groupIds(
@@ -163,11 +163,11 @@ export interface Group extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string, BigNumber, string] & {
+      [BigNumber, BigNumber, BigNumber, string, string] & {
         id: BigNumber;
-        nullfier: BigNumber;
-        name: string;
+        nullifier: BigNumber;
         criteria: BigNumber;
+        name: string;
         attr_key: string;
       }
     >;
@@ -201,11 +201,11 @@ export interface Group extends BaseContract {
     arg0: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, string, BigNumber, string] & {
+    [BigNumber, BigNumber, BigNumber, string, string] & {
       id: BigNumber;
-      nullfier: BigNumber;
-      name: string;
+      nullifier: BigNumber;
       criteria: BigNumber;
+      name: string;
       attr_key: string;
     }
   >;
@@ -239,11 +239,11 @@ export interface Group extends BaseContract {
       arg0: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, string, BigNumber, string] & {
+      [BigNumber, BigNumber, BigNumber, string, string] & {
         id: BigNumber;
-        nullfier: BigNumber;
-        name: string;
+        nullifier: BigNumber;
         criteria: BigNumber;
+        name: string;
         attr_key: string;
       }
     >;

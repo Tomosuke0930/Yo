@@ -26,70 +26,64 @@ import type {
 export declare namespace ICommitment {
   export type CommitmentStruct = {
     id: PromiseOrValue<BigNumberish>;
-    userId: PromiseOrValue<string>;
-    groupId: PromiseOrValue<BigNumberish>;
-    data: PromiseOrValue<BytesLike>;
-    metadata: PromiseOrValue<string>;
+    userId: PromiseOrValue<BytesLike>;
+    hash: PromiseOrValue<BytesLike>;
     mintAddress: PromiseOrValue<string>;
     createdAt: PromiseOrValue<BigNumberish>;
+    groupId: PromiseOrValue<BytesLike>;
+    metadata: PromiseOrValue<string>;
   };
 
   export type CommitmentStructOutput = [
     BigNumber,
     string,
+    string,
+    string,
     BigNumber,
     string,
-    string,
-    string,
-    BigNumber
+    string
   ] & {
     id: BigNumber;
     userId: string;
-    groupId: BigNumber;
-    data: string;
-    metadata: string;
+    hash: string;
     mintAddress: string;
     createdAt: BigNumber;
+    groupId: string;
+    metadata: string;
   };
 }
 
 export interface CommitmentInterface extends utils.Interface {
   functions: {
-    "addCom(address,uint256,bytes32,uint256,string,uint256)": FunctionFragment;
-    "getAllComs(address)": FunctionFragment;
-    "getComsLength(address)": FunctionFragment;
-    "updateCom(string,address,address,uint256)": FunctionFragment;
+    "addCommitment(address,uint256,bytes32,bytes32,bytes16,uint256)": FunctionFragment;
+    "getTargetCommitment(address,uint256)": FunctionFragment;
+    "updateCommitment(string,address,address,uint256)": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "addCom"
-      | "getAllComs"
-      | "getComsLength"
-      | "updateCom"
+      | "addCommitment"
+      | "getTargetCommitment"
+      | "updateCommitment"
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "addCom",
+    functionFragment: "addCommitment",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>,
-      PromiseOrValue<BigNumberish>,
-      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BytesLike>,
       PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
-    functionFragment: "getAllComs",
-    values: [PromiseOrValue<string>]
+    functionFragment: "getTargetCommitment",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getComsLength",
-    values: [PromiseOrValue<string>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "updateCom",
+    functionFragment: "updateCommitment",
     values: [
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -98,13 +92,18 @@ export interface CommitmentInterface extends utils.Interface {
     ]
   ): string;
 
-  decodeFunctionResult(functionFragment: "addCom", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getAllComs", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getComsLength",
+    functionFragment: "addCommitment",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "updateCom", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getTargetCommitment",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateCommitment",
+    data: BytesLike
+  ): Result;
 
   events: {};
 }
@@ -136,89 +135,77 @@ export interface Commitment extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    addCom(
+    addCommitment(
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _groupId: PromiseOrValue<BigNumberish>,
-      _userId: PromiseOrValue<string>,
+      _hash: PromiseOrValue<BytesLike>,
+      _userId: PromiseOrValue<BytesLike>,
+      _groupId: PromiseOrValue<BytesLike>,
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    getAllComs(
+    getTargetCommitment(
       _address: PromiseOrValue<string>,
+      _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
-      [ICommitment.CommitmentStructOutput[]] & {
-        commitments: ICommitment.CommitmentStructOutput[];
+      [ICommitment.CommitmentStructOutput] & {
+        commitment: ICommitment.CommitmentStructOutput;
       }
     >;
 
-    getComsLength(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { length: BigNumber }>;
-
-    updateCom(
+    updateCommitment(
       _metadta: PromiseOrValue<string>,
       _mintAddress: PromiseOrValue<string>,
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[void]>;
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  addCom(
+  addCommitment(
     _address: PromiseOrValue<string>,
     _id: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
-    _groupId: PromiseOrValue<BigNumberish>,
-    _userId: PromiseOrValue<string>,
+    _hash: PromiseOrValue<BytesLike>,
+    _userId: PromiseOrValue<BytesLike>,
+    _groupId: PromiseOrValue<BytesLike>,
     _createdAt: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  getAllComs(
+  getTargetCommitment(
     _address: PromiseOrValue<string>,
+    _id: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
-  ): Promise<ICommitment.CommitmentStructOutput[]>;
+  ): Promise<ICommitment.CommitmentStructOutput>;
 
-  getComsLength(
-    _address: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
-  updateCom(
+  updateCommitment(
     _metadta: PromiseOrValue<string>,
     _mintAddress: PromiseOrValue<string>,
     _address: PromiseOrValue<string>,
     _id: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<void>;
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    addCom(
+    addCommitment(
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _groupId: PromiseOrValue<BigNumberish>,
-      _userId: PromiseOrValue<string>,
+      _hash: PromiseOrValue<BytesLike>,
+      _userId: PromiseOrValue<BytesLike>,
+      _groupId: PromiseOrValue<BytesLike>,
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getAllComs(
+    getTargetCommitment(
       _address: PromiseOrValue<string>,
+      _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<ICommitment.CommitmentStructOutput[]>;
+    ): Promise<ICommitment.CommitmentStructOutput>;
 
-    getComsLength(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    updateCom(
+    updateCommitment(
       _metadta: PromiseOrValue<string>,
       _mintAddress: PromiseOrValue<string>,
       _address: PromiseOrValue<string>,
@@ -230,62 +217,54 @@ export interface Commitment extends BaseContract {
   filters: {};
 
   estimateGas: {
-    addCom(
+    addCommitment(
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _groupId: PromiseOrValue<BigNumberish>,
-      _userId: PromiseOrValue<string>,
+      _hash: PromiseOrValue<BytesLike>,
+      _userId: PromiseOrValue<BytesLike>,
+      _groupId: PromiseOrValue<BytesLike>,
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    getAllComs(
+    getTargetCommitment(
       _address: PromiseOrValue<string>,
+      _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getComsLength(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    updateCom(
+    updateCommitment(
       _metadta: PromiseOrValue<string>,
       _mintAddress: PromiseOrValue<string>,
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    addCom(
+    addCommitment(
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
-      _groupId: PromiseOrValue<BigNumberish>,
-      _userId: PromiseOrValue<string>,
+      _hash: PromiseOrValue<BytesLike>,
+      _userId: PromiseOrValue<BytesLike>,
+      _groupId: PromiseOrValue<BytesLike>,
       _createdAt: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    getAllComs(
+    getTargetCommitment(
       _address: PromiseOrValue<string>,
+      _id: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getComsLength(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    updateCom(
+    updateCommitment(
       _metadta: PromiseOrValue<string>,
       _mintAddress: PromiseOrValue<string>,
       _address: PromiseOrValue<string>,
       _id: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

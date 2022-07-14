@@ -35,14 +35,17 @@ contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownab
      *  NFT OPERATIONS
      ***********************************************/
 
+    /// @dev get the total supply of NFT
     function totalSupply() public view returns (uint256) {
         return supplyCounter.current();
     }
 
+    /// @dev setting the support interface of NFT
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1238, ERC1238URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
-
+    
+    /// @dev update the new base URI
     function setBaseURI(string memory newBaseURI) external onlyOwner {
         _setBaseURI(newBaseURI);
     }
@@ -51,7 +54,7 @@ contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownab
      *  Mint NFT
      ***********************************************/
     
-    /// @dev See {IContinuum-mint}.
+    /// @dev See {IYoMinter-mint}.
     function mint(
         uint256 root,
         uint256 nullifierHash,
@@ -83,25 +86,29 @@ contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownab
     /************************************************
      *  Burn NFT
      ***********************************************/
+
+    /// @dev See {IYoMinter-burn}.
     function burn(
         address from,
         uint256 id,
-        uint256 amount,
         bool deleteURI
-    ) external onlyOwner {
+    ) external override {
         if (deleteURI) {
-            _burnAndDeleteURI(from, id, amount);
+            _burnAndDeleteURI(from, id);
         } else {
-            _burn(from, id, amount);
+            _burn(from, id, 1);
+            emit Burned(from,id);
+            supplyCounter.decrement();
         }
     }
 
     function _burnAndDeleteURI(
         address from,
-        uint256 id,
-        uint256 amount
+        uint256 id
     ) internal virtual {
-        super._burn(from, id, amount);
+        super._burn(from, id, 1);
+        emit Burned(from,id);
+        supplyCounter.decrement();
 
         _deleteTokenURI(id);
     }

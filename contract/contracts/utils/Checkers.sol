@@ -9,10 +9,6 @@ abstract contract Checkers {
     function _levelCheck(uint256 _level) private pure {
         require(_level <= 16, 'Error');
     }
-
-    function _groupIdCheck(uint256 _groupId) private pure {
-        require(_groupId <= 49, 'Error');
-    }
     
     function _indexCheck(uint256 _index) private pure {
         require(_index <= 2**16, 'Error');
@@ -21,11 +17,6 @@ abstract contract Checkers {
     /************************************************
      *  Modifiers
      ***********************************************/
-
-    modifier groupIdCheck(uint256 _groupId) {
-        _groupIdCheck(_groupId);
-        _;
-    }
 
     modifier levelCheck(uint256 _level) {
         _levelCheck(_level);
@@ -42,7 +33,7 @@ abstract contract Checkers {
         uint256 _level,
         uint256 _index
     ) {
-        _groupIdCheck(_groupId);
+        // _groupIdCheck(_groupId);
         _levelCheck(_level);
         _indexCheck(_index);
         _;

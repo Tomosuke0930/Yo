@@ -33,7 +33,7 @@ export interface YoMinterInterface extends utils.Interface {
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address,uint256[])": FunctionFragment;
     "balanceOfBundle(address[],uint256[][])": FunctionFragment;
-    "burn(address,uint256,uint256,bool)": FunctionFragment;
+    "burn(address,uint256,bool)": FunctionFragment;
     "mint(uint256,uint256,uint256,uint256[8],string,uint8,bytes32,bytes32,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -83,7 +83,6 @@ export interface YoMinterInterface extends utils.Interface {
     functionFragment: "burn",
     values: [
       PromiseOrValue<string>,
-      PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>
     ]
@@ -174,6 +173,7 @@ export interface YoMinterInterface extends utils.Interface {
   events: {
     "BurnBatch(address,address,uint256[],uint256[])": EventFragment;
     "BurnSingle(address,address,uint256,uint256)": EventFragment;
+    "Burned(address,uint256)": EventFragment;
     "MintBatch(address,address,uint256[],uint256[])": EventFragment;
     "MintSingle(address,address,uint256,uint256)": EventFragment;
     "Minted(uint256,address)": EventFragment;
@@ -185,6 +185,7 @@ export interface YoMinterInterface extends utils.Interface {
 
   getEvent(nameOrSignatureOrTopic: "BurnBatch"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BurnSingle"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Burned"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MintBatch"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MintSingle"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Minted"): EventFragment;
@@ -219,6 +220,14 @@ export type BurnSingleEvent = TypedEvent<
 >;
 
 export type BurnSingleEventFilter = TypedEventFilter<BurnSingleEvent>;
+
+export interface BurnedEventObject {
+  from: string;
+  tokenId: BigNumber;
+}
+export type BurnedEvent = TypedEvent<[string, BigNumber], BurnedEventObject>;
+
+export type BurnedEventFilter = TypedEventFilter<BurnedEvent>;
 
 export interface MintBatchEventObject {
   minter: string;
@@ -342,7 +351,6 @@ export interface YoMinter extends BaseContract {
     burn(
       from: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
       deleteURI: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -417,7 +425,6 @@ export interface YoMinter extends BaseContract {
   burn(
     from: PromiseOrValue<string>,
     id: PromiseOrValue<BigNumberish>,
-    amount: PromiseOrValue<BigNumberish>,
     deleteURI: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -492,7 +499,6 @@ export interface YoMinter extends BaseContract {
     burn(
       from: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
       deleteURI: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -568,6 +574,9 @@ export interface YoMinter extends BaseContract {
       id?: PromiseOrValue<BigNumberish> | null,
       amount?: null
     ): BurnSingleEventFilter;
+
+    "Burned(address,uint256)"(from?: null, tokenId?: null): BurnedEventFilter;
+    Burned(from?: null, tokenId?: null): BurnedEventFilter;
 
     "MintBatch(address,address,uint256[],uint256[])"(
       minter?: PromiseOrValue<string> | null,
@@ -646,7 +655,6 @@ export interface YoMinter extends BaseContract {
     burn(
       from: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
       deleteURI: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -722,7 +730,6 @@ export interface YoMinter extends BaseContract {
     burn(
       from: PromiseOrValue<string>,
       id: PromiseOrValue<BigNumberish>,
-      amount: PromiseOrValue<BigNumberish>,
       deleteURI: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

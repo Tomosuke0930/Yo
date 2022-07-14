@@ -52,8 +52,6 @@ export type { IERC1238Receiver } from "./contracts/interface/ERC1238/IERC1238Rec
 export { IERC1238Receiver__factory } from "./factories/contracts/interface/ERC1238/IERC1238Receiver__factory";
 export type { IYoMinter } from "./contracts/interface/IYoMinter";
 export { IYoMinter__factory } from "./factories/contracts/interface/IYoMinter__factory";
-export type { Oracle } from "./contracts/interface/Sample.sol/Oracle";
-export { Oracle__factory } from "./factories/contracts/interface/Sample.sol/Oracle__factory";
 export type { MerkleTree } from "./contracts/MerkleTree";
 export { MerkleTree__factory } from "./factories/contracts/MerkleTree__factory";
 export type { Verifier } from "./contracts/Verifier";

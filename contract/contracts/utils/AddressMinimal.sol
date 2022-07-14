@@ -20,6 +20,15 @@ library Address {
      *  - an address where a contract lived, but was destroyed
      * ====
      */
+
+
+    function isEOA(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        return account.code.length == 0;
+    }
     function isContract(address account) internal view returns (bool) {
         // This method relies on extcodesize, which returns 0 for contracts in
         // construction, since the code is only stored at the end of the
