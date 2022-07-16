@@ -1,8 +1,8 @@
 # Contract Address in Rinkeby Testnet
 
 -   Commitment
-    0x9c0402b22A65cC02BE553e4Eabb13FAa63856BF5
-    https://rinkeby.etherscan.io/address/0x9c0402b22A65cC02BE553e4Eabb13FAa63856BF5#code
+    0xAa4C435bd1C2C2d906bDf0A1953cc114bAd76542
+    https://rinkeby.etherscan.io/address/0xAa4C435bd1C2C2d906bDf0A1953cc114bAd76542#code
 
 -   Groups
     0x05fa458C17c87433aD9417E6e22825635ee537F2
