@@ -9,7 +9,6 @@ https://github.com/tomoima525/continuum
 1. The improved version of the background checker Continuum
 2. On-chain skill-sharing service
 
-## What is Continuum?
 
 ### Continuum has good features.
 
@@ -25,14 +24,21 @@ https://github.com/tomoima525/continuum
    ↓ This is explained in more detail below
 
 3. Using ERC1238(Non Transferable Token)
-
+   
    ↓ This is explained in more detail below
 
 ### New features for Skill sharing service
 
 1. Only One SmartContract - Multi-Fronend product
 
-2. Low Feeで変わらない
+   ↓ This is explained in more detail below
+
+2. Fees are immutable
+
+   Existing services have raised fees as their services have become more popular. 
+   But users have had no choice but to continue using the service because they too are dependent on it. 
+   
+   Yo guarantees that the fee will remain the same at 2% of the transaction volume, a mechanism that the blockchain cannot be tampered with.
 
 ### 下記では特にArchitecture, Non TransferableToken, Only One SmartContract - Multi-Fronend について解説します
 
