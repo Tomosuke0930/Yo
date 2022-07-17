@@ -64,15 +64,21 @@ The architecture in Yo are as follows
 
 <img width="400" alt="6a00d8341c4f9853ef02a2eec7f809200d" src="https://user-images.githubusercontent.com/84496536/179429273-a27b0fd8-891b-41c6-bb52-011a40b05221.png">
 
+Because of its simplicity and lack of dependence on external services, as described above, Yo is able to continue to provide value in perpetuity.
 
 
 ## Non Transferable Token 💸🚫
 
+The NFT in Yo is the User's certificate. It does not need to be Transferable, or in other words, it must not be Transferable. Therefore, Yo uses the Non Transferable Token standard, ERC1238.
+
+User status is constantly updated. If you want to update the status of your NFT, you must burn it once and then mint it anew. This will update your NFT. And there is no cost for testnet.
+
+![1238](https://user-images.githubusercontent.com/84496536/179429582-1643e5c5-4364-46a7-bbd7-b82dc27cad80.png)
 
 ## Only One SmartContract - Multi-Fronend 🌿
 
 
-- How to use?
+# 🤔 How to use?
 ユーザーはforumで先生を探し、相談をします。
 先生はgithubをconnectしてnftをmintをしてidneitityを隠しながらスキルを証明できます
 (もちろん実名を公開することも可能です。)
