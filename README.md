@@ -52,7 +52,7 @@ The architecture in continuum are as follows
 - AWS(to store hased user information on the merkle tree. User doesn't have to pay gas fee in creating merkle tree)
 - Continuum Contract(to verify and mint nft)
 
-<img width="719" alt="6a00d8341c4f9853ef02a2eec7f819200d" src="https://user-images.githubusercontent.com/84496536/179429297-05d6e054-b7c7-4d3f-a46d-13925aac2e6e.png">
+<img width="400" alt="6a00d8341c4f9853ef02a2eec7f819200d" src="https://user-images.githubusercontent.com/84496536/179429297-05d6e054-b7c7-4d3f-a46d-13925aac2e6e.png">
 
 
 
@@ -62,7 +62,7 @@ The architecture in Yo are as follows
 - Frontend(to interact to blockcihain for user)
 - Continuum Contract(to verify and mint nft and to store hased user information on the merkle tree)
 
-<img width="653" alt="6a00d8341c4f9853ef02a2eec7f809200d" src="https://user-images.githubusercontent.com/84496536/179429273-a27b0fd8-891b-41c6-bb52-011a40b05221.png">
+<img width="400" alt="6a00d8341c4f9853ef02a2eec7f809200d" src="https://user-images.githubusercontent.com/84496536/179429273-a27b0fd8-891b-41c6-bb52-011a40b05221.png">
 
 
 
