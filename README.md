@@ -1,33 +1,34 @@
 Yo is a skill sharing service.
 Teacher can prove their skill without revealing their identity by using Zero Knowledge proof.
-ユーザーはforumで先生を探し、相談をします。
-先生はgithubをconnectしてnftをmintをしてidneitityを隠しながらスキルを証明できます(もちろん実名を公開することも可能です。)
 
+- How to use?
+ユーザーはforumで先生を探し、相談をします。
+先生はgithubをconnectしてnftをmintをしてidneitityを隠しながらスキルを証明できます
+(もちろん実名を公開することも可能です。)
+手数料は2%で変わりません。
 
 簡単にいうと、このプロダクトはbackground checkerのContinuumを改良したものと、スキルシェアサービスをon-chainで行うサービスを組み合わせたものということもできます
+
 This product is refer to Continuum for background checker using Zero Knowledge Proof
 https://github.com/tomoima525/continuum
 
 Continuum has good feature
-1.ZKP
+1.Using Zero Knowledge Proof to reveal user skill without revealing their identity
 2.If user mint nft on testnet, user doesn't pay the real gas
 
 Yo take it over and offer new benefits for backgroundChecker
-
-
 1. testnetだけでのmintにする
-2.  Architectur
+2.  Architecture
 frontend, contractというシンプルな設計
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f809200d-pi
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
-3. Non transferable NFTを採用
+3. Non transferableなNFTを採用
 
-
-## Skill Shareとして面白いところ
+## New features for Skill sharing service
 1. Only One SmartContract - Multi-Fronend product
 2. Low Feeで変わらない
 
-下記でNNontransferableとArchitecture,Multiに関して説明します
+### 下記では特にArchitecture, Non TransferableToken, Only One SmartContract - Multi-Fronend について解説します
 
 # Architectur: How it works?
 ## Continuum
@@ -38,6 +39,11 @@ The architecture in continuum are as follows
 
 ## Yo
 The architecture in Yo are as follows
+
+# Non Transferable Token
+
+
+# Only One SmartContract - Multi-Fronend 
 
 
 
@@ -69,4 +75,3 @@ The architecture in Yo are as follows
 1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
 2. Frontendの作成
 3. Forumの用意
-
