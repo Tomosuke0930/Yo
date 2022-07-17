@@ -1,11 +1,11 @@
-# Yo is a skill sharing service using Zero Knowledge Proof
+# 🖐 Yo is a skill sharing service using Zero Knowledge Proof
 
 
 This product is refer to Continuum for background checker using Zero Knowledge Proof
 https://github.com/tomoima525/continuum
 
 
-## Yo is consist of 2 parts.
+## Yo is consist of 2 parts. 
 1. The improved version of the background checker Continuum
 2. On-chain skill-sharing service
 
@@ -43,9 +43,9 @@ https://github.com/tomoima525/continuum
    Yo guarantees that the fee will remain the same at 2% of the transaction volume, a mechanism that the blockchain cannot be tampered with.
 
 
-# Distinctive features of Yo
+# ✨ Distinctive features of Yo
 
-## Architectur: How it works?
+## Architectur: How it works? 🏯
 ### Continuum
 The architecture in continuum are as follows
 - Frontend(to interact to blockcihain for user)
@@ -61,10 +61,10 @@ The architecture in Yo are as follows
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f809200d-pi
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
 
-## Non Transferable Token
+## Non Transferable Token 💸🚫
 
 
-## Only One SmartContract - Multi-Fronend 
+## Only One SmartContract - Multi-Fronend 🌿
 
 
 - How to use?
@@ -98,7 +98,7 @@ https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
     0x614C1B3CD8E19840963410997634dbcdb700b0f4
     https://rinkeby.etherscan.io/address/0x614C1B3CD8E19840963410997634dbcdb700b0f4#code
 
-## Roadmap🛣
+# 🛣 Roadmap
 
 1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
 2. Frontendの作成
