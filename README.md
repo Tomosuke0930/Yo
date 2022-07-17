@@ -73,7 +73,9 @@ The NFT in Yo is the User's certificate. It does not need to be Transferable, or
 
 User status is constantly updated. If you want to update the status of your NFT, you must burn it once and then mint it anew. This will update your NFT. And there is no cost for testnet.
 
-![1238](https://user-images.githubusercontent.com/84496536/179429582-1643e5c5-4364-46a7-bbd7-b82dc27cad80.png)
+
+
+<img width="400" alt="6a00d8341c4f9853ef02a2eec7f809200d" src="https://user-images.githubusercontent.com/84496536/179429639-111ef971-725c-4d3d-9b25-6b8f1c923102.png">
 
 ## Only One SmartContract - Multi-Fronend 🌿
 
