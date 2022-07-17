@@ -65,3 +65,7 @@ The architecture in Yo are as follows
     https://rinkeby.etherscan.io/address/0x614C1B3CD8E19840963410997634dbcdb700b0f4#code
 
 ## Roadmap
+1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
+2. Frontendの作成
+3. Forumの用意
+
