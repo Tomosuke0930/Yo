@@ -32,7 +32,7 @@ https://github.com/tomoima525/continuum
 
 ### New features for Skill sharing service
 
-1. Only One SmartContract - Multi-Fronend product
+1. Only One SmartContract - Multi-Fronend architecture
 
    ↓ This is explained in more detail below
 
