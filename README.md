@@ -55,6 +55,8 @@ The architecture in continuum are as follows
 
 ### Yo
 The architecture in Yo are as follows
+- Frontend(to interact to blockcihain for user)
+- Continuum Contract(to verify and mint nft and to store hased user information on the merkle tree)
 
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f809200d-pi
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
