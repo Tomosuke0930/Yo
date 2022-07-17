@@ -19,6 +19,9 @@ https://github.com/tomoima525/continuum
 ### Yo take it over and offer new benefits for backgroundChecker
 1. Yo only mint nft with testnet.
 
+   The purpose of nft is to demonstrate skills. Therefore, there is no need for a main net.    
+   Also, considering the burden on the user, we decided to use only testnet.
+
 2. The architecture
 
    ↓ This is explained in more detail below
@@ -36,30 +39,30 @@ https://github.com/tomoima525/continuum
 2. Fees are immutable
 
    Existing services have raised fees as their services have become more popular. 
-   But users have had no choice but to continue using the service because they too are dependent on it. 
-   
+   But users have had no choice but to continue using the service because they too are dependent on it.    
    Yo guarantees that the fee will remain the same at 2% of the transaction volume, a mechanism that the blockchain cannot be tampered with.
 
-### 下記では特にArchitecture, Non TransferableToken, Only One SmartContract - Multi-Fronend について解説します
 
-# Architectur: How it works?
-## Continuum
+# Distinctive features of Yo
+
+## Architectur: How it works?
+### Continuum
 The architecture in continuum are as follows
 - Frontend(to interact to blockcihain for user)
 - AWS(to store hased user information on the merkle tree. User doesn't have to pay gas fee in creating merkle tree)
 - Continuum Contract(to verify and mint nft)
 
 
-## Yo
+### Yo
 The architecture in Yo are as follows
 
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f809200d-pi
 https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
 
-# Non Transferable Token
+## Non Transferable Token
 
 
-# Only One SmartContract - Multi-Fronend 
+## Only One SmartContract - Multi-Fronend 
 
 
 - How to use?
@@ -69,7 +72,8 @@ https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
 手数料は2%で変わりません。
 
 
-# Contract Address in Rinkeby Testnet
+
+## Contract Address in Rinkeby Testnet
 
 -   Commitment
     0xAa4C435bd1C2C2d906bDf0A1953cc114bAd76542
@@ -92,8 +96,8 @@ https://satoshi.blogs.com/.a/6a00d8341c4f9853ef02a2eec7f819200d-pi
     0x614C1B3CD8E19840963410997634dbcdb700b0f4
     https://rinkeby.etherscan.io/address/0x614C1B3CD8E19840963410997634dbcdb700b0f4#code
 
-## 🛣Roadmap🛣
-🛣
+## Roadmap🛣
+
 1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
 2. Frontendの作成
 3. Forumの用意
