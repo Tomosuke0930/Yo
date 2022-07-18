@@ -83,6 +83,8 @@ There is no designated front end for this project.
 Anyone can create a front-end.
 And engineers who create a front-end can claim a part of the reward.
 
+<img width="400" alt="Screen Shot 2022-07-18 at 9 25 50" src="https://user-images.githubusercontent.com/84496536/179430915-caa055b1-d626-4767-86eb-d03af93cce4d.png">
+
 ### How to join Yo as a front-end engineer.
 
 1. Read the Contract and create a front end with the necessary functions embedded.
@@ -95,12 +97,19 @@ https://github.com/Tomosuke0930/Yo/blob/main/contract/contracts/YoV1.sol#L78-L82
 
 
 # 🤔 How to use?
-ユーザーはforumで先生を探し、相談をします。
-先生はgithubをconnectしてnftをmintをしてidneitityを隠しながらスキルを証明できます
-(もちろん実名を公開することも可能です。)
-手数料は2%で変わりません。
 
+1. Join the form of Yo
+2. User: find a Teacher from forum who has the skills you are looking for 
+   
+   Teacher: Create a bio for the profile. At that time, the teacher connects to github and mints the nft. This can prove your skills while hiding your idneitity. (Of course, you can also disclose your real name.)
 
+3. Finish their service
+
+4. User: Payment and teacher reviewing
+
+   Teacher: Receive payment.(The fee is 2% and immutable)
+
+   Frontend: The developer of the front will be able to CLAIM 1% of the payment
 
 ## Contract Address in Rinkeby Testnet
 
@@ -130,3 +139,4 @@ https://github.com/Tomosuke0930/Yo/blob/main/contract/contracts/YoV1.sol#L78-L82
 1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
 2. Frontendの作成
 3. Forumの用意
+4. Github以外のSNSでのステータスを証明可能にする(Reddit, Twitter, Instagram, Youtube)
