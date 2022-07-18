@@ -130,13 +130,14 @@ https://github.com/Tomosuke0930/Yo/blob/main/contract/contracts/YoV1.sol#L78-L82
 -   YoMinter
     0x3dc608285bc53F400e7BfB93b833E0F5508244E3
     https://rinkeby.etherscan.io/address/0x3dc608285bc53F400e7BfB93b833E0F5508244E3#code
--   YoV1
+-   YoV1(I deployed testnet but, I will deploy on mainnet)
     0x614C1B3CD8E19840963410997634dbcdb700b0f4
     https://rinkeby.etherscan.io/address/0x614C1B3CD8E19840963410997634dbcdb700b0f4#code
 
 # 🛣 Roadmap
 
-1. Diamond2535 testnetを全て対応させる、mainnetにdeployする
-2. Frontendの作成
-3. Forumの用意
-4. Github以外のSNSでのステータスを証明可能にする(Reddit, Twitter, Instagram, Youtube)
+1. make all contracts deployed to testnet other than YoV1 correspond to EIP2535
+Deploy YoV1 to mianne 2.
+3. create official Frontend
+4. prepare Forum
+5. enable status verification on SNS other than Github (Reddit, Twitter, Instagram, Youtube)
