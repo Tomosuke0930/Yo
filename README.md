@@ -79,6 +79,20 @@ User status is constantly updated. If you want to update the status of your NFT,
 
 ## Only One SmartContract - Multi-Fronend 🌿
 
+There is no designated front end for this project.
+Anyone can create a front-end.
+And engineers who create a front-end can claim a part of the reward.
+
+### How to join Yo as a front-end engineer.
+
+1. Read the Contract and create a front end with the necessary functions embedded.
+2. Set the address of the Frontend developer for the argument when calling the function to be settled in the front
+3. The 1% settled there will be recorded in the Smart Contract
+4. User can claim it
+
+Here is the code
+https://github.com/Tomosuke0930/Yo/blob/main/contract/contracts/YoV1.sol#L78-L82
+
 
 # 🤔 How to use?
 ユーザーはforumで先生を探し、相談をします。
