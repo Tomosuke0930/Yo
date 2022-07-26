@@ -2,6 +2,9 @@
 
 ## 🚧🚧🚧 | Now I'm moving to EIP 2535💎 | 🚧🚧🚧
 
+This is the branch of it 👉 [LINK](https://github.com/Tomosuke0930/Yo/pull/21)
+
+---
 
 This product is refer to Continuum for background checker using Zero Knowledge Proof
 https://github.com/tomoima525/continuum
