@@ -1,27 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
-
-import './interface/IMerkleTree.sol';
-import './utils/Checkers.sol';
+import {AppStorage} from "../libraries/LibAppStorage.sol";
+import '../interface/IMerkleTree.sol';
+import '../utils/Checkers.sol';
 
 contract MerkleTree is IMerkleTree, Checkers {
-    mapping(address => mapping(uint256 => MerkleTreeNode)) userNodes;
-
-    /************************************************
-     *  Variables & Constant 
-     ***********************************************/
-
-    uint256 public constant nums = 49;
-    MerkleTree[nums] public merkleTrees;
+    // /************************************************
+    //  *  Variables
+    //  ***********************************************/
+    AppStorage internal s;
 
     /************************************************
      *  Getters count for something of Mekrle Tree 
      ***********************************************/
 
     /// get "index" of Merkle Tree
-    function getMerkleTreesIndex(uint256 _groupId) private view returns (uint256 idsIndex) {
-        for (uint256 i = 0; i < nums; i++) {
-            if (_groupId == merkleTrees[i].groupId) return idsIndex = i;
+    function getMerkleTreesIndex(uint256 _groupId) external view returns (uint256 idsIndex) {
+        for (uint256 i = 0; i < s.merkelTrees.length; i++) {
+            if (_groupId == s.merkleTrees[i].groupId) return idsIndex = i;
         }
     }
 
@@ -32,7 +28,7 @@ contract MerkleTree is IMerkleTree, Checkers {
     /// get "amounts" of Merkle Tree
     function getNodeCounts(uint256 _groupId) public view groupIdCheck(_groupId) returns (uint256 nodeCounts) {
         uint256 idsIndexs = getMerkleTreesIndex(_groupId);
-        nodeCounts = merkleTrees[idsIndexs].nodes.length;
+        nodeCounts = s.merkleTrees[idsIndexs].nodes.length;
     }
 
     /************************************************
@@ -42,11 +38,11 @@ contract MerkleTree is IMerkleTree, Checkers {
     /// get "all nodes" of Merkle Tree
     function getAllNodes(uint256 _groupId) public view groupIdCheck(_groupId) returns (MerkleTreeNode[] memory allNodes) {
         uint256 idsIndexs = getMerkleTreesIndex(_groupId);
-        allNodes = merkleTrees[idsIndexs].nodes;
+        allNodes = s.merkleTrees[idsIndexs].nodes;
     }
 
     /// get "all nodes" the same "level"
-    function getNodesByLevel(uint256 _groupId, uint256 _level) private view returns (MerkleTreeNode[] memory nodes, uint256 counts) {
+    function getNodesByLevel(uint256 _groupId, uint256 _level) public view returns (MerkleTreeNode[] memory nodes, uint256 counts) {
         MerkleTreeNode[] memory allNodes = getAllNodes(_groupId);
         for (uint256 i = 0; i < allNodes.length; i++) {
             if (_level == allNodes[i].level) {
@@ -100,8 +96,8 @@ contract MerkleTree is IMerkleTree, Checkers {
             node.index = _index;
             node.level = _level;
         }
-        merkleTrees[treeIndex].nodes.push(node);
-        userNodes[_signer][_groupId] = node;///check
+        s.merkleTrees[treeIndex].nodes.push(node);
+        s.userNodes[_signer][_groupId] = node;///check
     }
     
     /// Collectively execute addNode func
@@ -122,7 +118,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         bytes32 _hash
     ) public  {
         // MerkleTreeNode memory node = getNode(_groupId, _level, _index);
-        MerkleTreeNode storage node = userNodes[_signer][_groupId];
+        MerkleTreeNode storage node = s.userNodes[_signer][_groupId];
         node.hash = _hash;
     }
 
@@ -137,7 +133,7 @@ contract MerkleTree is IMerkleTree, Checkers {
         bytes32 _siblingHash
     ) public {
         // MerkleTreeNode memory node = getNode(_groupId, _level, _index); //this is target node
-        MerkleTreeNode storage node = userNodes[_signer][_groupId];
+        MerkleTreeNode storage node = s.userNodes[_signer][_groupId];
         {
             node.siblingHash = _siblingHash;
             node.parent.groupId = _groupId;
