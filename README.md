@@ -1,5 +1,7 @@
 # 🖐 Yo is a skill sharing service using Zero Knowledge Proof
 
+## 🚧🚧🚧 | Now I'm moving to EIP 2535💎 | 🚧🚧🚧
+
 
 This product is refer to Continuum for background checker using Zero Knowledge Proof
 https://github.com/tomoima525/continuum
