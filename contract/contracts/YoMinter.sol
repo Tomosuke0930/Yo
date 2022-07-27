@@ -11,7 +11,7 @@ import '@appliedzkp/semaphore-contracts/interfaces/IVerifier.sol';
 
 
 /// @title YoNFTMinter
-contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownable {
+contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownable, Initializable {
 
     /************************************************
      *  Library & Variables  
@@ -27,7 +27,7 @@ contract YoMinter is IYoMinter, SemaphoreCore, ERC1238, ERC1238URIStorage, Ownab
      *  Constructor
      ***********************************************/
 
-    constructor(address verifierAddress, string memory baseURI_) ERC1238(baseURI_) {
+    constructor(address verifierAddress, string memory baseURI_) initializer ERC1238(baseURI_) {
         verifier = IVerifier(verifierAddress);
     }
 
